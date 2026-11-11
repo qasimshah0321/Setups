@@ -3,7 +3,9 @@
 **QueryCraft** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [QueryCraft.vsix](https://github.com/qasimshah0321/Setups/raw/main/QueryCraft/QueryCraft.vsix) (version 1.1.6)
+**Download:** [QueryCraft.vsix](https://github.com/qasimshah0321/Setups/raw/main/QueryCraft/QueryCraft.vsix) (version 1.1.8)
+
+SHA-256: `4C739E0793D994CEE227CBB6012E71F5F04FDDBA76B0175FE448B7A57FE8A24D`
 
 ---
 
@@ -131,7 +133,7 @@ format, check, refactor and navigate T-SQL faster, right inside the SSMS query e
 Settings are under **Tools ▸ Options ▸ QueryCraft**.
 
 **Requirements:**
-- SQL Server Management Studio 22.
+- SQL Server Management Studio 22 (any 22.x release).
 - SQL Server 2008 or later. Generated rename scripts use `CREATE OR ALTER`, which needs SQL Server 2016 SP1 or later.
 
 **To uninstall:** use **Extensions ▸ Manage Extensions** in SSMS.
