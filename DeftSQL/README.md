@@ -1,15 +1,23 @@
-# QueryCraft for SSMS 22
+# DeftSQL for SSMS 22
 
-**QueryCraft** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
+**DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [QueryCraft.vsix](https://github.com/qasimshah0321/Setups/raw/main/QueryCraft/QueryCraft.vsix) (version 1.1.8)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.0.0)
 
-SHA-256: `4C739E0793D994CEE227CBB6012E71F5F04FDDBA76B0175FE448B7A57FE8A24D`
+SHA-256: `FA3CA0B47B394555C91F8B76342152BA00CB5958891C6012F5103ED7194060DC`
+
+> **Previously called QueryCraft.** DeftSQL 2.0 is the same product under a new name. If you installed QueryCraft, uninstall it first (close SSMS, then run in Command Prompt):
+>
+> ```
+> "C:\Program Files\Microsoft SQL Server Management Studio 22\Release\Common7\IDE\VSIXInstaller.exe" /uninstall:QueryCraft.SSMS.4b8f2c1e-7a3d-4e5f-9c6b-2d1a0e9f8b7c
+> ```
+>
+> Your settings, snippets and history are carried over automatically.
 
 ---
 
-## What QueryCraft can do
+## What DeftSQL can do
 
 ### Smart code completion
 - Suggests tables, views, functions and stored procedures as you type, and adds a short alias after `FROM` / `JOIN`.
@@ -74,7 +82,7 @@ SHA-256: `4C739E0793D994CEE227CBB6012E71F5F04FDDBA76B0175FE448B7A57FE8A24D`
 
 ### Environment tab coloring and safety
 - A colored bar above each query window shows which environment you are on: **Production**, **Staging**, **Test** or **Dev**.
-- QueryCraft asks for confirmation before running:
+- DeftSQL asks for confirmation before running:
   - `DELETE` or `UPDATE` without a `WHERE` clause,
   - `DROP` or `TRUNCATE`,
   - anything on a production connection.
@@ -123,24 +131,27 @@ SHA-256: `4C739E0793D994CEE227CBB6012E71F5F04FDDBA76B0175FE448B7A57FE8A24D`
 
 ## Installation
 
-1. Download **QueryCraft.vsix**.
+1. Download **DeftSQL.vsix**.
 2. Close SSMS.
-3. Double-click `QueryCraft.vsix` and follow the installer.
-4. Start SSMS. You'll find everything under **Extensions ▸ QueryCraft**, and in the query editor's right-click menu.
+3. Double-click `DeftSQL.vsix` and follow the installer.
+4. Start SSMS. You'll find everything under **Extensions ▸ DeftSQL**, and in the query editor's right-click menu.
 5. Recommended: turn off SSMS's built-in IntelliSense list so you don't get two popups.
    It's under **Tools ▸ Options ▸ Text Editor ▸ Transact-SQL ▸ IntelliSense**.
 
-Settings are under **Tools ▸ Options ▸ QueryCraft**.
+Settings are under **Tools ▸ Options ▸ DeftSQL**.
 
 **Requirements:**
 - SQL Server Management Studio 22 (any 22.x release).
 - SQL Server 2008 or later. Generated rename scripts use `CREATE OR ALTER`, which needs SQL Server 2016 SP1 or later.
 
-**To uninstall:** use **Extensions ▸ Manage Extensions** in SSMS.
+**To uninstall:** close SSMS, then run in Command Prompt:
+```
+"C:\Program Files\Microsoft SQL Server Management Studio 22\Release\Common7\IDE\VSIXInstaller.exe" /uninstall:DeftSQL.SSMS.4b8f2c1e-7a3d-4e5f-9c6b-2d1a0e9f8b7c
+```
 
 ---
 
 Developed by **Syed Muhammad Qasim**.
 
-QueryCraft is an independent product. It is not affiliated with, endorsed by or sponsored by any other
+DeftSQL is an independent product. It is not affiliated with, endorsed by or sponsored by any other
 software vendor. All product names are trademarks of their respective owners.
