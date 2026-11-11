@@ -3,7 +3,7 @@
 **QueryCraft** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [QueryCraft.vsix](https://github.com/qasimshah0321/Setups/raw/main/QueryCraft/QueryCraft.vsix) (version 1.1.5)
+**Download:** [QueryCraft.vsix](https://github.com/qasimshah0321/Setups/raw/main/QueryCraft/QueryCraft.vsix) (version 1.1.6)
 
 ---
 
