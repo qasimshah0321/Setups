@@ -12,14 +12,30 @@ Version **0.10.0** · Windows 10 or later (x64)
 |---|---|---|
 | [SnapLain-Setup-0.10.0.exe](https://github.com/qasimshah0321/Setups/raw/main/SnapLain/SnapLain-Setup-0.10.0.exe) | ~6 MB | Most people. Installs for the current user without an admin prompt. Downloads the .NET 8 Desktop Runtime from Microsoft if the PC doesn't have it. |
 | [SnapLain-0.10.0-x64.msi](https://github.com/qasimshah0321/Setups/raw/main/SnapLain/SnapLain-0.10.0-x64.msi) | ~56 MB | Offline installs and IT deployment. Self-contained (.NET runtime included), installs for all users. |
+| [SnapLain-Setup-0.10.0-Store.exe](https://raw.githubusercontent.com/qasimshah0321/Setups/main/SnapLain/SnapLain-Setup-0.10.0-Store.exe) | ~50 MB | Microsoft Store (EXE submission) and silent installs. Self-contained (.NET included), installs for all users, no prerequisites. |
 | [SnapLain-0.10.0.msix](https://github.com/qasimshah0321/Setups/raw/main/SnapLain/SnapLain-0.10.0.msix) | ~69 MB | Microsoft Store submission. This package is **unsigned** (the Store signs it), so Windows won't install it by double-clicking — use the .exe or .msi for normal installs. |
 
 SHA-256:
 - `SnapLain-Setup-0.10.0.exe`: `0A1E6EDAA5E898B625C3EA9846B11A43FEB3B05E0C6E9783555574A95CBA38E7`
 - `SnapLain-0.10.0-x64.msi`: `487B563D742FC7F8373A0CA56CD21DBAA1E2AFE6AA4349134D32D155FC47AB58`
+- `SnapLain-Setup-0.10.0-Store.exe`: `E74AA39EDE2DEB82995F949A934CF3AB4CE8A5DADADF4448C8424A55652B0BBA`
 - `SnapLain-0.10.0.msix`: `B92C776C0079A14AB529EF08542BEB1349228653E6060BD19FB2F5CBEBF97988`
 
 > Previously called **Pixora** / **SnapIT**. Old `.pixora` and `.snapit` projects still open, and older captures stay in your history.
+
+### Microsoft Store submission (MSI/EXE app)
+
+In Partner Center › Packages, use the **direct** links below (the `github.com/.../raw/...` links redirect, which
+the Store validation may not follow):
+
+| Package | Package URL | Installer parameters |
+|---|---|---|
+| EXE | `https://raw.githubusercontent.com/qasimshah0321/Setups/main/SnapLain/SnapLain-Setup-0.10.0-Store.exe` | `/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-` |
+| MSI | `https://raw.githubusercontent.com/qasimshah0321/Setups/main/SnapLain/SnapLain-0.10.0-x64.msi` | none needed (MSI installs silently by itself) |
+
+- Architecture **x64**, language **English**.
+- Add or remove programs entry: name **SnapLain**, publisher **SnapLain**, so the app name and the publisher display name in Partner Center should match these.
+- Don't submit `SnapLain-Setup-0.10.0.exe` (the small one): when .NET is missing it downloads the runtime and asks for administrator approval separately, so it can't install fully silently.
 
 ### Install
 1. Download one of the packages above.
