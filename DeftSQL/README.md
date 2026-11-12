@@ -3,9 +3,9 @@
 **DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.0.0)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.2.0)
 
-SHA-256: `FA3CA0B47B394555C91F8B76342152BA00CB5958891C6012F5103ED7194060DC`
+SHA-256: `50BAC57252FBB7C6127FEBCE034DA2CE59E4542C29407723FACB91AAF7912FE5`
 
 > **Previously called QueryCraft.** DeftSQL 2.0 is the same product under a new name. If you installed QueryCraft, uninstall it first (close SSMS, then run in Command Prompt):
 >
@@ -65,7 +65,11 @@ SHA-256: `FA3CA0B47B394555C91F8B76342152BA00CB5958891C6012F5103ED7194060DC`
 - **Add or remove square brackets.**
 - **Uppercase or lowercase keywords.**
 - **Encapsulate as stored procedure.**
-- **Script query results as `INSERT` statements.**
+- **Script query results as `INSERT`, `UPDATE` or `DELETE` (Ctrl+B, Ctrl+D):**
+  - Run a SELECT, then turn its rows into statements in a new query window.
+  - Works through aliases and joins: columns are mapped back to their real table, and the primary key is ticked for you.
+  - Computed and rowversion columns are skipped, identity values are kept.
+  - The script is wrapped in a transaction; you choose `COMMIT` or `ROLLBACK`.
 
 ### Navigation
 - **Find Object:** search every table, view, procedure and column, with wildcards.
@@ -91,8 +95,10 @@ SHA-256: `FA3CA0B47B394555C91F8B76342152BA00CB5958891C6012F5103ED7194060DC`
 - **Text to SQL:** describe what you want in plain English and get the query.
 - **Explain SQL**, **Optimize**, **Fix errors** and **Index analysis**.
 - An **Assistant chat** window.
-- Uses your own Anthropic (Claude) API key, which is stored encrypted on your PC. Table data is never sent.
-- Offline explain and index analysis work without a key.
+- Choose the AI engine:
+  - **Claude:** your own Anthropic API key, stored encrypted on your PC.
+  - **Local and fully offline:** install [Ollama](https://ollama.com), run `ollama pull qwen2.5-coder:7b` (or `qwen2.5-coder:3b` on 8 GB PCs), then set **Provider = Ollama** in Tools ▸ Options ▸ DeftSQL ▸ AI. Nothing leaves your computer.
+- Table data is never sent. Offline explain and index analysis work without any AI.
 
 ---
 
@@ -116,6 +122,7 @@ SHA-256: `FA3CA0B47B394555C91F8B76342152BA00CB5958891C6012F5103ED7194060DC`
 | Ctrl+B, Ctrl+B | Add/remove square brackets |
 | Ctrl+B, Ctrl+C | Insert semicolons |
 | Ctrl+B, Ctrl+E | Encapsulate as stored procedure |
+| Ctrl+B, Ctrl+D | Script query results as INSERT / UPDATE / DELETE |
 | Ctrl+B, Ctrl+U / Ctrl+L | Keywords upper / lower case |
 | Ctrl+B, Ctrl+S | Script summary |
 | Ctrl+B, Ctrl+F | Find unused variables and parameters |
