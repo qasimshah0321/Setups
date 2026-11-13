@@ -3,9 +3,9 @@
 **DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.6.2)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.7.0)
 
-SHA-256: `B1FEFFC6F02A869E7846DB6630C0765BE95A472831F759643C6AF1F08F16848B`
+SHA-256: `DB12A3C2399174B5CCC89F02C4038348B6FE5C9A379287B74421B2BF28E0679A`
 
 **Product guide:** [DeftSQL-Product-Guide.docx](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL-Product-Guide.docx) (Word, every feature with its menu path and screenshots)
 
@@ -102,6 +102,14 @@ Right-click the SSMS results grid and choose **DeftSQL**:
 - **Copy as CSV**, with column names.
 - **Open in Excel:** a real Excel file with a frozen header and filters; codes such as `00123` keep their zeros.
 - **Script Rows as INSERT:** turns the selected rows into `INSERT` statements.
+- **Copy as JSON**, **Copy as Markdown Table** (for tickets and wikis) and **Copy as VALUES** (`SELECT * FROM (VALUES …) AS v (…)`).
+- **Script as Temp Table:** `CREATE TABLE #Results` with column types inferred from the values, plus the rows as `INSERT`s.
+- **Totals in the status bar:** select cells to see Count, Sum, Avg, Min, Max and Distinct, like Excel.
+- **Find in Results:** filter every row of a result as you type, then jump to the matching cell in the grid.
+- **View Cell Value:** see a long value in full, with JSON and XML indented.
+- **Compare with Baseline:** keep one result, run the query again and see exactly which rows and cells changed.
+
+The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the editor's right-click menu and the **Results Grid** dropdown on the toolbar.
 
 ### Settings and teams
 - **Export Settings… / Import Settings…** move all your options and snippets to another PC in one file. API keys are never included.
@@ -182,7 +190,8 @@ Right-click the SSMS results grid and choose **DeftSQL**:
 2. Close SSMS.
 3. Double-click `DeftSQL.vsix` and follow the installer.
 4. Start SSMS. You'll find everything under **Extensions ▸ DeftSQL**, in the query editor's right-click menu,
-   and on the **DeftSQL toolbar** (Format, Snippets, Find Object, Code Analysis, Split Table, Script Results, Text to SQL,
+   and on the **DeftSQL toolbar** (Format, Snippets, Find Object, Code Analysis, Split Table, Script Results, Find in Results,
+   View Cell Value, Compare with Baseline, the Results Grid menu, Text to SQL,
    Explain, Optimize, AI Assistant, Query and Tab History, Refresh, Options, and a label showing which AI model
    answers). Show or hide the toolbar with **View ▸ Toolbars ▸ DeftSQL**.
 5. Recommended: turn off SSMS's built-in IntelliSense list so you don't get two popups.
