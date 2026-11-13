@@ -3,9 +3,9 @@
 **DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.5.2)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.6.2)
 
-SHA-256: `B17B8822F63BA4B293BBFAB2F6CB655EBFA2869D84E6F16F03F9456A31C6AB9F`
+SHA-256: `B1FEFFC6F02A869E7846DB6630C0765BE95A472831F759643C6AF1F08F16848B`
 
 **Product guide:** [DeftSQL-Product-Guide.docx](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL-Product-Guide.docx) (Word, every feature with its menu path and screenshots)
 
@@ -28,13 +28,16 @@ SHA-256: `B17B8822F63BA4B293BBFAB2F6CB655EBFA2869D84E6F16F03F9456A31C6AB9F`
 - Adds a parameter template after `EXEC`.
 - **Parameter info:** while you type a call to a stored procedure or function, a tooltip shows its parameters and highlights the one you are typing.
 - Also completes variables, CTEs, temp tables, data types, `INSERT` column lists and keywords.
+- **Learns what you use:** tables, columns and procedures you pick often move to the top of the list.
+- **Hide clutter:** list patterns such as `Archive.*` or `tmp_*` in the options and those objects never appear.
+- **Other databases:** type `OtherDb.` for its schemas, `OtherDb.dbo.` for its tables and `OtherDb.dbo.Table.` for its columns.
 - While the list is open:
   - **Ctrl+Up / Ctrl+Down** filter it: tables, columns, procedures, variables, schemas, keywords or snippets.
   - **Ctrl+Right** opens a column picker. Tick the columns you need and press Enter to insert them.
 - Put the caret after `SELECT *` and press **Tab** to **expand the wildcard** into the full column list.
 
 ### Snippets
-- About 50 built-in snippets: type a shortcut and press **Tab**.
+- 140 built-in snippets: type a shortcut and press **Tab**. They cover queries, joins, CTEs, DDL (columns, keys, indexes, triggers), dates, JSON and XML, error handling and DBA checks such as blocking, waits, index fragmentation, backups and jobs.
   - For example, `ssf` gives `SELECT * FROM`, `st100` gives `SELECT TOP 100`, and `cte` gives a CTE template.
   - Others cover transactions (`bt`), try/catch (`tc`) and `MERGE` (`mrg`).
 - Placeholders fill themselves in: cursor position, selected text, date and time, user, server, database, a new GUID, and the clipboard.
@@ -45,17 +48,24 @@ SHA-256: `B17B8822F63BA4B293BBFAB2F6CB655EBFA2869D84E6F16F03F9456A31C6AB9F`
 - **Ctrl+K, Ctrl+Y** formats the whole script or just the selection.
 - Six built-in styles plus a fully custom style, with a live preview window.
 - Styles can be imported and exported, and format-on-paste is optional.
+- Option to write table, column and procedure names exactly as they are defined in the database (`dbo.customers` becomes `dbo.Customers`).
+- More layout options: space after commas, spaces inside parentheses, aligned column aliases and short statements on one line.
+- **Team styles:** point DeftSQL at a shared folder and everyone gets the same styles.
+- **Format SQL Files…** formats every `.sql` file in a folder in one go.
 - A safety check refuses any formatting that would change the meaning of your code.
 
 ### Code analysis
-- About 36 rules check your SQL as you type and underline problems:
+- 72 rules check your SQL as you type and underline problems:
   - risky statements,
   - best-practice issues,
   - performance problems,
   - deprecated syntax,
   - style issues,
-  - security concerns.
+  - security concerns,
+  - code review findings such as commented-out code, TODO markers and empty `CATCH` blocks.
 - **Ctrl+.** applies quick fixes, one at a time or all at once.
+- **Turn a rule off where it is expected:** Ctrl+. can add a comment such as `-- deftsql-disable-next BP011` for one statement or the whole script.
+- **Team rule sets:** export which rules are on and share one file with the whole team.
 - **Find Unused Variables and Parameters** lists them in the current script.
 - **Find Invalid Objects** finds procedures, views and functions that refer to objects that no longer exist.
 
@@ -78,6 +88,23 @@ SHA-256: `B17B8822F63BA4B293BBFAB2F6CB655EBFA2869D84E6F16F03F9456A31C6AB9F`
   - You can also target another table, such as an archive copy.
   - Computed and rowversion columns are skipped, identity values are kept.
   - The script is wrapped in a transaction; you choose `COMMIT` or `ROLLBACK`.
+- **Split Table:** move some columns of a table into a new table with the same primary key, for example address
+  columns from `dbo.Customer` into `dbo.CustomerAddress`.
+  - Pick the columns and name the new table; DeftSQL opens a script for you to review.
+  - The script creates the table, copies the data, and moves the indexes, foreign keys, defaults and check
+    constraints of those columns, all in one transaction.
+  - It finishes by listing the views and procedures that use the moved columns, so you can update them.
+  - On the Refactor menu, the DeftSQL toolbar and the editor's right-click menu.
+
+### Results grid
+Right-click the SSMS results grid and choose **DeftSQL**:
+- **Copy as IN list:** turns the selected values into `(1, 2, 3)` or `(N'A', N'B')`, ready for `WHERE … IN`.
+- **Copy as CSV**, with column names.
+- **Open in Excel:** a real Excel file with a frozen header and filters; codes such as `00123` keep their zeros.
+- **Script Rows as INSERT:** turns the selected rows into `INSERT` statements.
+
+### Settings and teams
+- **Export Settings… / Import Settings…** move all your options and snippets to another PC in one file. API keys are never included.
 
 ### Navigation
 - **Find Object:** search every table, view, procedure and column, with wildcards.
@@ -155,7 +182,7 @@ SHA-256: `B17B8822F63BA4B293BBFAB2F6CB655EBFA2869D84E6F16F03F9456A31C6AB9F`
 2. Close SSMS.
 3. Double-click `DeftSQL.vsix` and follow the installer.
 4. Start SSMS. You'll find everything under **Extensions ▸ DeftSQL**, in the query editor's right-click menu,
-   and on the **DeftSQL toolbar** (Format, Snippets, Find Object, Code Analysis, Script Results, Text to SQL,
+   and on the **DeftSQL toolbar** (Format, Snippets, Find Object, Code Analysis, Split Table, Script Results, Text to SQL,
    Explain, Optimize, AI Assistant, Query and Tab History, Refresh, Options, and a label showing which AI model
    answers). Show or hide the toolbar with **View ▸ Toolbars ▸ DeftSQL**.
 5. Recommended: turn off SSMS's built-in IntelliSense list so you don't get two popups.
