@@ -3,9 +3,11 @@
 **DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.5.1)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.5.2)
 
-SHA-256: `F7AC62ADFAD805A88BC55B0749D6F92DE8C3505478E80D97E6F54848A481DAFC`
+SHA-256: `B17B8822F63BA4B293BBFAB2F6CB655EBFA2869D84E6F16F03F9456A31C6AB9F`
+
+**Product guide:** [DeftSQL-Product-Guide.docx](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL-Product-Guide.docx) (Word, every feature with its menu path and screenshots)
 
 > **Previously called QueryCraft.** DeftSQL 2.0 is the same product under a new name. If you installed QueryCraft, uninstall it first (close SSMS, then run in Command Prompt):
 >
