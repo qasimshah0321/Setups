@@ -3,9 +3,9 @@
 **DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.2.0)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.5.1)
 
-SHA-256: `50BAC57252FBB7C6127FEBCE034DA2CE59E4542C29407723FACB91AAF7912FE5`
+SHA-256: `F7AC62ADFAD805A88BC55B0749D6F92DE8C3505478E80D97E6F54848A481DAFC`
 
 > **Previously called QueryCraft.** DeftSQL 2.0 is the same product under a new name. If you installed QueryCraft, uninstall it first (close SSMS, then run in Command Prompt):
 >
@@ -24,6 +24,7 @@ SHA-256: `50BAC57252FBB7C6127FEBCE034DA2CE59E4542C29407723FACB91AAF7912FE5`
 - Suggests the columns of the tables in your query, qualified with the right alias.
 - Builds complete **`JOIN … ON`** conditions from your foreign keys.
 - Adds a parameter template after `EXEC`.
+- **Parameter info:** while you type a call to a stored procedure or function, a tooltip shows its parameters and highlights the one you are typing.
 - Also completes variables, CTEs, temp tables, data types, `INSERT` column lists and keywords.
 - While the list is open:
   - **Ctrl+Up / Ctrl+Down** filter it: tables, columns, procedures, variables, schemas, keywords or snippets.
@@ -68,6 +69,11 @@ SHA-256: `50BAC57252FBB7C6127FEBCE034DA2CE59E4542C29407723FACB91AAF7912FE5`
 - **Script query results as `INSERT`, `UPDATE` or `DELETE` (Ctrl+B, Ctrl+D):**
   - Run a SELECT, then turn its rows into statements in a new query window.
   - Works through aliases and joins: columns are mapped back to their real table, and the primary key is ticked for you.
+  - **Several tables at once:** tick every table of a join; parents and children are put in foreign-key order.
+  - **Join-based UPDATE / DELETE:** one statement per table that reuses your query's own joins and `WHERE`,
+    instead of one statement per row. Alias a value with the target column's name to set it, e.g. `p.LastName AS JobTitle`.
+  - Primary keys you didn't select are fetched automatically, so each table can still be matched.
+  - You can also target another table, such as an archive copy.
   - Computed and rowversion columns are skipped, identity values are kept.
   - The script is wrapped in a transaction; you choose `COMMIT` or `ROLLBACK`.
 
@@ -93,6 +99,11 @@ SHA-256: `50BAC57252FBB7C6127FEBCE034DA2CE59E4542C29407723FACB91AAF7912FE5`
 
 ### AI assistant (optional)
 - **Text to SQL:** describe what you want in plain English and get the query.
+  - DeftSQL sends the model only the tables your question needs (matched on table and column names and the
+    database's own column descriptions), how they join, and a ready-made `FROM … JOIN` clause.
+  - The generated SQL is compiled on the server without running it. If a column or table is wrong, DeftSQL tells
+    the model which table really has that column and how to join it, and lets it correct itself (up to three times).
+  - If a problem remains, it is listed in a comment above the query so you know to review it.
 - **Explain SQL**, **Optimize**, **Fix errors** and **Index analysis**.
 - An **Assistant chat** window.
 - Choose the AI engine:
@@ -141,7 +152,10 @@ SHA-256: `50BAC57252FBB7C6127FEBCE034DA2CE59E4542C29407723FACB91AAF7912FE5`
 1. Download **DeftSQL.vsix**.
 2. Close SSMS.
 3. Double-click `DeftSQL.vsix` and follow the installer.
-4. Start SSMS. You'll find everything under **Extensions ▸ DeftSQL**, and in the query editor's right-click menu.
+4. Start SSMS. You'll find everything under **Extensions ▸ DeftSQL**, in the query editor's right-click menu,
+   and on the **DeftSQL toolbar** (Format, Snippets, Find Object, Code Analysis, Script Results, Text to SQL,
+   Explain, Optimize, AI Assistant, Query and Tab History, Refresh, Options, and a label showing which AI model
+   answers). Show or hide the toolbar with **View ▸ Toolbars ▸ DeftSQL**.
 5. Recommended: turn off SSMS's built-in IntelliSense list so you don't get two popups.
    It's under **Tools ▸ Options ▸ Text Editor ▸ Transact-SQL ▸ IntelliSense**.
 
