@@ -3,9 +3,9 @@
 **DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.7.0)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.8.0)
 
-SHA-256: `DB12A3C2399174B5CCC89F02C4038348B6FE5C9A379287B74421B2BF28E0679A`
+SHA-256: `4F71C7A0FE9184D0C59878EF648B689DFE4B7E447D30AAC79B64A6D2D6DD66D1`
 
 **Product guide:** [DeftSQL-Product-Guide.docx](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL-Product-Guide.docx) (Word, every feature with its menu path and screenshots)
 
@@ -95,6 +95,14 @@ SHA-256: `DB12A3C2399174B5CCC89F02C4038348B6FE5C9A379287B74421B2BF28E0679A`
     constraints of those columns, all in one transaction.
   - It finishes by listing the views and procedures that use the moved columns, so you can update them.
   - On the Refactor menu, the DeftSQL toolbar and the editor's right-click menu.
+- **Generate CRUD Procedures:** put the caret on a table name and get `Get`, `Insert`, `Update` and `Delete`
+  stored procedures as a script to review.
+  - Tick the procedures you want and choose a name pattern such as `{Table}_{Action}` or `usp_{Table}{Action}`.
+  - Rows are found by the primary key (or a unique index, or the identity column).
+  - Insert skips identity and computed columns, uses column defaults when a parameter is `NULL`, and returns the
+    new identity value. Update reports an error when no row matches; a `rowversion` column protects Update and
+    Delete from overwriting someone else's change.
+  - On the Refactor menu and the editor's right-click menu.
 
 ### Results grid
 Right-click the SSMS results grid and choose **DeftSQL**:
