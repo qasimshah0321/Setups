@@ -9,6 +9,8 @@ SHA-256: `547FE69444E3A9611A85D45E541B8DFF86D76906C59189A33A3118F4D9E1BA05`
 
 **Product guide:** [DeftSQL-Product-Guide.docx](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL-Product-Guide.docx) (Word, every feature with its menu path and screenshots)
 
+**Jump to:** [Features](#what-deftsql-can-do) · [Keyboard shortcuts](#keyboard-shortcuts) · [Version history](#version-history) · [Installation](#installation)
+
 > **Previously called QueryCraft.** DeftSQL 2.0 is the same product under a new name. If you installed QueryCraft, uninstall it first (close SSMS, then run in Command Prompt):
 >
 > ```
@@ -36,6 +38,15 @@ SHA-256: `547FE69444E3A9611A85D45E541B8DFF86D76906C59189A33A3118F4D9E1BA05`
   - **Ctrl+Right** opens a column picker. Tick the columns you need and press Enter to insert them.
 - Put the caret after `SELECT *` and press **Tab** to **expand the wildcard** into the full column list.
 
+
+![Code completion with the object definition box](screenshots/completion.png)
+
+*Typing `FROM HumanResources.Emp`: matching tables and views, with the selected table's script, indexes and row count.*
+
+![JOIN suggestions from foreign keys](screenshots/join-suggestions.png)
+
+*After `JOIN`, ready-made join conditions from the foreign keys.*
+
 ### Snippets
 - 140 built-in snippets: type a shortcut and press **Tab**. They cover queries, joins, CTEs, DDL (columns, keys, indexes, triggers), dates, JSON and XML, error handling and DBA checks such as blocking, waits, index fragmentation, backups and jobs.
   - For example, `ssf` gives `SELECT * FROM`, `st100` gives `SELECT TOP 100`, and `cte` gives a CTE template.
@@ -55,6 +66,15 @@ SHA-256: `547FE69444E3A9611A85D45E541B8DFF86D76906C59189A33A3118F4D9E1BA05`
 - A safety check refuses any formatting that would change the meaning of your code.
 - **Code folding:** collapse `--region name` … `--endregion` blocks, `BEGIN … END`, `TRY/CATCH`, `CASE` and long comments in long scripts.
 
+
+| Before | After **Ctrl+K, Ctrl+Y** |
+|---|---|
+| ![Unformatted query](screenshots/format-before.png) | ![Formatted query](screenshots/format-after.png) |
+
+![Formatting Styles window with live preview](screenshots/formatting-styles.png)
+
+*Formatting Styles: settings on the left, live preview on the right.*
+
 ### Code analysis
 - 76 rules check your SQL as you type and underline problems:
   - risky statements,
@@ -71,6 +91,15 @@ SHA-256: `547FE69444E3A9611A85D45E541B8DFF86D76906C59189A33A3118F4D9E1BA05`
 - **Team rule sets:** export which rules are on and share one file with the whole team.
 - **Find Unused Variables and Parameters** lists them in the current script.
 - **Find Invalid Objects** finds procedures, views and functions that refer to objects that no longer exist.
+
+
+![Code analysis squiggles](screenshots/analysis-squiggles.png)
+
+*Issues underlined as you type: an unused variable, `SELECT *`, a `NOLOCK` hint, `ORDER BY` ordinal and a comparison with `NULL`.*
+
+![Code Analysis rules tab](screenshots/analysis-rules.png)
+
+*Turn rules on or off and share them as a team rule set.*
 
 ### Refactoring
 - **Smart rename (F2):**
@@ -118,6 +147,19 @@ SHA-256: `547FE69444E3A9611A85D45E541B8DFF86D76906C59189A33A3118F4D9E1BA05`
 - **Change Procedure Signature:** add, remove, reorder or rename parameters; the script alters the procedure and
   updates every `EXEC` of it in the database.
 
+
+![Script Query Results dialog](screenshots/script-results-dialog.png)
+
+*Script Query Results: choose the statement type, the method and the tables to change...*
+
+![Generated UPDATE script](screenshots/script-results-update.png)
+
+*...then review the generated script, wrapped in a transaction.*
+
+![Generated CRUD procedures](screenshots/crud-procedures.png)
+
+*Generate CRUD Procedures for `HumanResources.Department`.*
+
 ### Performance tuning
 - **Profile Query (Ctrl+B, Ctrl+P):** runs the statement at the caret with statistics and the actual plan (data changes
   are rolled back) and shows reads per table, CPU and elapsed time, the costliest plan operators and findings with advice:
@@ -142,6 +184,20 @@ Right-click the SSMS results grid and choose **DeftSQL**:
 - **Compare with Baseline:** keep one result, run the query again and see exactly which rows and cells changed.
 - **Script as MERGE / Upsert:** upsert the selected rows into a table, matched on its key.
 
+<img src="screenshots/grid-menu.png" alt="Results grid right-click menu" width="480">
+
+![Totals of the selected cells in the status bar](screenshots/grid-totals.png)
+
+*Select cells and Count, Sum, Avg, Min, Max and Distinct appear in the status bar.*
+
+![Compare with Baseline](screenshots/grid-compare.png)
+
+*Compare with Baseline after an `UPDATE`: changed cells as old → new, and rows only in A or only in B.*
+
+![Script as Temp Table](screenshots/grid-temp-table.png)
+
+*Script as Temp Table: column types inferred from the values.*
+
 The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the editor's right-click menu and the **Results Grid** dropdown on the toolbar.
 
 ### Settings and teams
@@ -158,6 +214,11 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 - **Shift+F5:** run just the statement under the caret.
 - **Script Summary:** an outline of every statement in a long script.
 - Hover over a table or column to see its details, including where a column is used: procedures, keys, indexes and constraints.
+
+
+![Find Object](screenshots/find-object.png)
+
+*Find Object: search tables, views, procedures and columns across schemas.*
 
 ### Query and tab history
 - **Query History** records every query you run. You can search it and mark favorites.
@@ -184,6 +245,14 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
   - **Claude:** your own Anthropic API key, stored encrypted on your PC.
   - **Local and fully offline:** install [Ollama](https://ollama.com), run `ollama pull qwen2.5-coder:7b` (or `qwen2.5-coder:3b` on 8 GB PCs), then set **Provider = Ollama** in Tools ▸ Options ▸ DeftSQL ▸ AI. Nothing leaves your computer.
 - Table data is never sent. Offline explain and index analysis work without any AI.
+
+![Query generated by Text to SQL](screenshots/text-to-sql.png)
+
+*Text to SQL with a local model, fully offline: the right schemas, joins on the right keys, filter and sort.*
+
+![Explain SQL in the AI Assistant](screenshots/explain-sql.png)
+
+*Explain SQL in the AI Assistant window.*
 
 ---
 
@@ -229,6 +298,70 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 
 ---
 
+## Version history
+
+### 2.9.0 (17 November 2026): performance tuning, navigation and code generation
+- **Performance:** Profile Query (reads per table, CPU and time, plan findings with advice), Estimated Plan Insights,
+  Query Runs with before/after compare, statistics or plan XML analyzed from the clipboard, and Live Sessions with the blocking tree.
+- **Navigation:** Go to Definition (F12) for any name, with Alt+Left to go back; Search in Definitions across all databases
+  and SQL Agent jobs; Find All References (Shift+F12); code folding for `--region`, `BEGIN … END`, `TRY/CATCH` and `CASE`.
+- **Code generation:** Generate MERGE / Upsert, Paste as SQL from Excel or CSV, Convert SELECT ⇄ UPDATE / DELETE,
+  Rewrite (`IN` → `EXISTS`/`JOIN`, derived table → CTE, `EXEC` → `sp_executesql`) and Change Procedure Signature.
+- **Results grid:** Script as MERGE / Upsert.
+- **Code analysis:** 4 new rules for filters that can't use an index (76 rules in total).
+- **Fix:** Script as Temp Table now uses the base type of user-defined alias types (such as AdventureWorks' `dbo.Name`), so the script runs in tempdb.
+
+### 2.8.0 (16 November 2026): Generate CRUD Procedures
+- Get, Insert, Update and Delete procedures for a table as a reviewable `CREATE OR ALTER` script, with a name pattern,
+  the new identity value as `OUTPUT`, column defaults, and optimistic concurrency on `rowversion` columns.
+
+### 2.7.0 (13 November 2026): results grid tools
+- Totals of the selected cells in the status bar, Find in Results, View Cell Value (JSON and XML indented) and Compare with Baseline.
+- Copy as JSON, Markdown Table and VALUES; Script as Temp Table with inferred column types.
+- DeftSQL windows keep their own keyboard input (Backspace and the arrow keys no longer edit the query behind them).
+
+### 2.6.2 (13 November 2026)
+- Split Table button on the DeftSQL toolbar.
+
+### 2.6.1 (13 November 2026)
+- Split Table in the query editor's right-click menu.
+
+### 2.6.0 (13 November 2026): teams, results grid and Split Table
+- Completion ranked by usage, hidden objects, and completion for other databases on the same server.
+- Formatting: object names in the database's case, more layout options, team styles and Format SQL Files.
+- Code analysis: 33 new rules (72 in total), suppression comments and team rule sets.
+- Split Table; results grid Copy as IN list, Copy as CSV, Open in Excel and Script Rows as INSERT.
+- Export / Import Settings, 140 built-in snippets and the `deftsql` command line for CI.
+
+### 2.5.2 (13 November 2026)
+- The DeftSQL submenu appears in the SSMS 22 query editor's right-click menu.
+
+### 2.5.1 (13 November 2026): smarter Text to SQL and the toolbar
+- Text to SQL sends only the relevant tables, uses column descriptions and foreign-key join paths, compiles the result
+  on the server and lets the model correct itself.
+- Script Query Results: several tables at once, join-based UPDATE / DELETE, hidden primary keys and foreign-key order.
+- DeftSQL toolbar, and parameter info for procedures and functions.
+
+### 2.2.0 (12 November 2026): script query results and offline AI
+- Script Query Results as INSERT / UPDATE / DELETE (Ctrl+B, Ctrl+D).
+- Local AI through Ollama or any OpenAI-compatible server, fully offline.
+- Formatting of the dynamic SQL inside `EXEC sp_executesql`.
+
+### 2.0.0 (11 November 2026): QueryCraft is now DeftSQL
+- New name and extension ID; settings, snippets and history move over automatically.
+
+### 1.1.8 (11 November 2026, as QueryCraft)
+- Works with every SSMS 22.x release.
+- Security: passwords are masked in query history and AI requests, and Script as INSERT runs only a read-only SELECT.
+
+### 1.1.6 (11 November 2026, as QueryCraft)
+- Fix: completion after `FROM schema.` lists that schema's objects.
+
+### 1.1.5 (11 November 2026, as QueryCraft)
+- First release.
+
+---
+
 ## Installation
 
 1. Download **DeftSQL.vsix**.
@@ -242,6 +375,12 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
    answers). Show or hide the toolbar with **View ▸ Toolbars ▸ DeftSQL**.
 5. Recommended: turn off SSMS's built-in IntelliSense list so you don't get two popups.
    It's under **Tools ▸ Options ▸ Text Editor ▸ Transact-SQL ▸ IntelliSense**.
+
+| Extensions ▸ DeftSQL | Right-click in a query window |
+|---|---|
+| ![DeftSQL menu](screenshots/menu-extensions.png) | ![DeftSQL right-click menu](screenshots/menu-right-click.png) |
+
+![DeftSQL toolbar](screenshots/toolbar.png)
 
 Settings are under **Tools ▸ Options ▸ DeftSQL**.
 
