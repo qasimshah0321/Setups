@@ -62,6 +62,10 @@ SHA-256: `B25A641B22055D0A2098890802C1D559A11426837E35BD9B2FBF08B6076F7EE6`
   The alias is included, and wrapping inside another call works (`UPPER(ISNULL(p.Title, ''))`). **Ctrl+Space** with a column selected
   opens the list on demand and lets you type to filter it. Typing over the selection, Delete and Backspace still work as usual.
   Option: *Suggest functions for a selected column* (on).
+- **Light bulb, no selection needed:** put the caret in front of, inside or at the end of a column such as `p3.rowguid`.
+  The light bulb appears: click it or press **Ctrl+.** and choose *Wrap p3.rowguid in a function*. Its submenu lists every call
+  (`ISNULL(p3.rowguid, '00000000-0000-0000-0000-000000000000')`, `CAST(...)` ...); click one to apply it, or press Enter on the
+  entry to open the function list beside the column and type to filter. Option: *Light bulb on columns* (on).
 
 
 ![Code completion with the object definition box](screenshots/completion.png)
@@ -85,6 +89,10 @@ SHA-256: `B25A641B22055D0A2098890802C1D559A11426837E35BD9B2FBF08B6076F7EE6`
 ![Column wrapped in ISNULL](screenshots/wrap-function-after.png)
 
 *After picking ISNULL: `ISNULL(p.FirstName, '')`.*
+
+![Light bulb on a column](screenshots/wrap-function-lightbulb.png)
+
+*The caret in front of `p3.rowguid`: the light bulb (Ctrl+.) offers to wrap it in a function.*
 
 ### Snippets
 - 140 built-in snippets: type a shortcut and press **Tab**. They cover queries, joins, CTEs, DDL (columns, keys, indexes, triggers), dates, JSON and XML, error handling and DBA checks such as blocking, waits, index fragmentation, backups and jobs.
@@ -347,7 +355,9 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 - **Wrap a selected column in a function:** select a column (double-click, drag or Shift+arrows) and a list of the built-in
   functions that fit its type opens; pick one to get `ISNULL(p.FirstName, '')`, `LEFT(p.FirstName, 1)`, `UPPER(p.FirstName)` ...
   Ctrl+Space with a column selected opens it on demand and lets you type to filter.
-- New options: *Tab completes function arguments* (on), *Alias completed functions in SELECT* (off) and *Suggest functions for a selected column* (on).
+- **Light bulb on columns:** with the caret in front of, inside or at the end of a column such as `p3.rowguid`, the light bulb
+  (Ctrl+.) offers *Wrap p3.rowguid in a function*: its submenu applies a call directly, Enter opens the function list.
+- New options: *Tab completes function arguments* (on), *Alias completed functions in SELECT* (off), *Suggest functions for a selected column* (on) and *Light bulb on columns* (on).
 - `DATALENGTH`, `ISDATE`, `LOG10`, `PATINDEX`, `SQUARE`, `STDEVP` and `VARP` added to completion and highlighting.
 - Product guide: new section with an examples table and before/after screenshots.
 
