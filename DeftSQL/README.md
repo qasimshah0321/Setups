@@ -3,7 +3,7 @@
 **DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.9.1)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.10.0)
 
 SHA-256: `B25A641B22055D0A2098890802C1D559A11426837E35BD9B2FBF08B6076F7EE6`
 
@@ -37,6 +37,25 @@ SHA-256: `B25A641B22055D0A2098890802C1D559A11426837E35BD9B2FBF08B6076F7EE6`
   - **Ctrl+Up / Ctrl+Down** filter it: tables, columns, procedures, variables, schemas, keywords or snippets.
   - **Ctrl+Right** opens a column picker. Tick the columns you need and press Enter to insert them.
 - Put the caret after `SELECT *` and press **Tab** to **expand the wildcard** into the full column list.
+- **Function arguments (new in 2.10.0):** type a built-in function and a column, e.g. `isnull(p.Firstname`, and press **Tab**.
+  DeftSQL fills in the rest for the column's type and fixes the column name's case. Values you will likely change are selected so you can type over them.
+  About 80 functions are covered: NULL handling, text, numbers, conversion, dates, aggregates, window functions and JSON.
+
+  | You type, then Tab | You get |
+  |---|---|
+  | `isnull(p.Firstname` | `ISNULL(p.FirstName, '')` |
+  | `isnull(e.vacationhours` | `ISNULL(e.VacationHours, 0)` |
+  | `isnull(o.ShipDate` | `ISNULL(o.ShipDate, '19000101')` |
+  | `left(p.LastName` | `LEFT(p.LastName, 1)` |
+  | `substring(e.JobTitle` | `SUBSTRING(e.JobTitle, 1, 50)` (the column's length) |
+  | `format(e.HireDate` | `FORMAT(e.HireDate, 'yyyy-MM-dd')` |
+  | `convert(e.HireDate` | `CONVERT(varchar(10), e.HireDate, 120)` |
+  | `dateadd(e.HireDate` | `DATEADD(day, 1, e.HireDate)` |
+  | `lag(e.VacationHours` | `LAG(e.VacationHours, 1, 0) OVER (ORDER BY )` |
+  | `upper(p.firstname` | `UPPER(p.FirstName)` |
+
+  Enter does the same when arguments are added. While a GitHub Copilot suggestion is shown, Tab accepts Copilot's suggestion instead.
+  Options: *Tab completes function arguments* and *Alias completed functions in SELECT* (adds `AS FirstName`, off by default).
 
 
 ![Code completion with the object definition box](screenshots/completion.png)
@@ -46,6 +65,12 @@ SHA-256: `B25A641B22055D0A2098890802C1D559A11426837E35BD9B2FBF08B6076F7EE6`
 ![JOIN suggestions from foreign keys](screenshots/join-suggestions.png)
 
 *After `JOIN`, ready-made join conditions from the foreign keys.*
+
+| Before Tab | After Tab |
+|---|---|
+| ![Functions typed with only a column](screenshots/function-args-before.png) | ![Arguments filled in for each column's type](screenshots/function-args-after.png) |
+
+*Function argument completion: each line before and after pressing Tab.*
 
 ### Snippets
 - 140 built-in snippets: type a shortcut and press **Tab**. They cover queries, joins, CTEs, DDL (columns, keys, indexes, triggers), dates, JSON and XML, error handling and DBA checks such as blocking, waits, index fragmentation, backups and jobs.
@@ -261,7 +286,7 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 | Shortcut | Command |
 |---|---|
 | Ctrl+K, Ctrl+Y | Format SQL |
-| Tab | Expand snippet / expand `*` |
+| Tab | Expand snippet / expand `*` / complete function arguments after `fn(column` |
 | Ctrl+Space | Show suggestions |
 | Ctrl+. | Quick fixes & refactorings |
 | F2 | Smart rename |
@@ -299,6 +324,15 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 ---
 
 ## Version history
+
+### 2.10.0 (17 November 2026): function argument completion
+- **Tab after a built-in function and a column** fills in the arguments for the column's type:
+  `ISNULL(p.FirstName, '')`, `ISNULL(e.Salary, 0)`, `LEFT(p.Name, 1)`, `CONVERT(varchar(10), o.OrderDate, 120)`,
+  `DATEADD(day, 1, e.HireDate)` and about 80 more functions. Placeholders are selected for typing over; variables use their declared type.
+- Enter does the same when arguments are added; Tab is left to GitHub Copilot while its suggestion is shown.
+- New options: *Tab completes function arguments* (on) and *Alias completed functions in SELECT* (off).
+- `DATALENGTH`, `ISDATE`, `LOG10`, `PATINDEX`, `SQUARE`, `STDEVP` and `VARP` added to completion and highlighting.
+- Product guide: new section with an examples table and before/after screenshots.
 
 ### 2.9.1 (17 November 2026): clearer toolbar icons
 - Every toolbar button now has its own icon: Profile Query is a speedometer, Suggest Fixes and Optimizations a light bulb,
