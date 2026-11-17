@@ -3,9 +3,9 @@
 **DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.8.0)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.9.0)
 
-SHA-256: `4F71C7A0FE9184D0C59878EF648B689DFE4B7E447D30AAC79B64A6D2D6DD66D1`
+SHA-256: `547FE69444E3A9611A85D45E541B8DFF86D76906C59189A33A3118F4D9E1BA05`
 
 **Product guide:** [DeftSQL-Product-Guide.docx](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL-Product-Guide.docx) (Word, every feature with its menu path and screenshots)
 
@@ -53,9 +53,10 @@ SHA-256: `4F71C7A0FE9184D0C59878EF648B689DFE4B7E447D30AAC79B64A6D2D6DD66D1`
 - **Team styles:** point DeftSQL at a shared folder and everyone gets the same styles.
 - **Format SQL Files…** formats every `.sql` file in a folder in one go.
 - A safety check refuses any formatting that would change the meaning of your code.
+- **Code folding:** collapse `--region name` … `--endregion` blocks, `BEGIN … END`, `TRY/CATCH`, `CASE` and long comments in long scripts.
 
 ### Code analysis
-- 72 rules check your SQL as you type and underline problems:
+- 76 rules check your SQL as you type and underline problems:
   - risky statements,
   - best-practice issues,
   - performance problems,
@@ -63,6 +64,8 @@ SHA-256: `4F71C7A0FE9184D0C59878EF648B689DFE4B7E447D30AAC79B64A6D2D6DD66D1`
   - style issues,
   - security concerns,
   - code review findings such as commented-out code, TODO markers and empty `CATCH` blocks.
+- Performance warnings as you type for filters that can't use an index: arithmetic on a column, a number compared
+  with a text column, an `nvarchar` variable compared with a `varchar` column, and catch-all `(@p IS NULL OR col = @p)` filters.
 - **Ctrl+.** applies quick fixes, one at a time or all at once.
 - **Turn a rule off where it is expected:** Ctrl+. can add a comment such as `-- deftsql-disable-next BP011` for one statement or the whole script.
 - **Team rule sets:** export which rules are on and share one file with the whole team.
@@ -103,6 +106,27 @@ SHA-256: `4F71C7A0FE9184D0C59878EF648B689DFE4B7E447D30AAC79B64A6D2D6DD66D1`
     new identity value. Update reports an error when no row matches; a `rowversion` column protects Update and
     Delete from overwriting someone else's change.
   - On the Refactor menu and the editor's right-click menu.
+- **Generate MERGE / Upsert:** a reviewable `MERGE … WITH (HOLDLOCK)` (or `UPDATE` then `INSERT`) for a table from
+  another table, a temp table or a query. Only rows that really changed are updated (NULL-safe), with optional delete
+  of missing rows and `OUTPUT $action`.
+- **Paste as SQL (Ctrl+B, Ctrl+V):** cells copied from Excel, a CSV file or a grid become `INSERT` statements, a temp
+  table, a `VALUES` list or a `MERGE`. The header row and separator are detected for you.
+- **Convert SELECT ⇄ UPDATE / DELETE (Ctrl+B, Ctrl+T):** turn the SELECT you used to check the rows into the
+  `UPDATE` or `DELETE` with the same `FROM` and `WHERE`, and back again.
+- **Rewrite (Ctrl+B, Ctrl+R):** `IN (subquery)` → `EXISTS` or `JOIN`, derived table → CTE, and string `EXEC` →
+  `sp_executesql` with real parameters.
+- **Change Procedure Signature:** add, remove, reorder or rename parameters; the script alters the procedure and
+  updates every `EXEC` of it in the database.
+
+### Performance tuning
+- **Profile Query (Ctrl+B, Ctrl+P):** runs the statement at the caret with statistics and the actual plan (data changes
+  are rolled back) and shows reads per table, CPU and elapsed time, the costliest plan operators and findings with advice:
+  missing indexes (with a `CREATE INDEX` script), implicit conversions, spills, key lookups, memory grants, bad row estimates and more.
+- **Compare runs:** pick two runs, before and after a fix, and see what changed.
+- **Estimated Plan Insights (Ctrl+B, Ctrl+M):** the same findings without running the query.
+- **Analyze from clipboard:** paste Messages-tab statistics or plan XML.
+- **Live Sessions:** running requests, the blocking tree with its lead blocker, waits and SQL text, refreshed every 5 seconds
+  (needs `VIEW SERVER STATE`).
 
 ### Results grid
 Right-click the SSMS results grid and choose **DeftSQL**:
@@ -116,6 +140,7 @@ Right-click the SSMS results grid and choose **DeftSQL**:
 - **Find in Results:** filter every row of a result as you type, then jump to the matching cell in the grid.
 - **View Cell Value:** see a long value in full, with JSON and XML indented.
 - **Compare with Baseline:** keep one result, run the query again and see exactly which rows and cells changed.
+- **Script as MERGE / Upsert:** upsert the selected rows into a table, matched on its key.
 
 The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the editor's right-click menu and the **Results Grid** dropdown on the toolbar.
 
@@ -124,7 +149,11 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 
 ### Navigation
 - **Find Object:** search every table, view, procedure and column, with wildcards.
-- **F12:** script the object under the caret as `ALTER`.
+- **Go to Definition (F12)** for any name: variables, CTEs, temp tables and aliases jump to their declaration; tables,
+  procedures, `EXEC` targets, synonyms and objects in other databases open their definition. **Alt+Left** goes back.
+- **Search in Definitions (Ctrl+B, Ctrl+J):** search the code of every procedure, view, function, trigger and SQL Agent
+  job step in all databases.
+- **Find All References (Shift+F12):** what uses an object and what it uses, as a tree.
 - **Ctrl+F12:** select that object in Object Explorer.
 - **Shift+F5:** run just the statement under the caret.
 - **Script Summary:** an outline of every statement in a long script.
@@ -167,7 +196,9 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 | Ctrl+Space | Show suggestions |
 | Ctrl+. | Quick fixes & refactorings |
 | F2 | Smart rename |
-| F12 | Script object as ALTER |
+| F12 | Go to definition |
+| Alt+Left | Navigate back |
+| Shift+F12 | Find all references |
 | Ctrl+F12 | Select in Object Explorer |
 | Shift+F5 | Execute current statement |
 | Ctrl+Q | Tab history |
@@ -179,6 +210,12 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 | Ctrl+B, Ctrl+C | Insert semicolons |
 | Ctrl+B, Ctrl+E | Encapsulate as stored procedure |
 | Ctrl+B, Ctrl+D | Script query results as INSERT / UPDATE / DELETE |
+| Ctrl+B, Ctrl+T | Convert SELECT ⇄ UPDATE / DELETE |
+| Ctrl+B, Ctrl+R | Rewrite |
+| Ctrl+B, Ctrl+V | Paste clipboard as SQL |
+| Ctrl+B, Ctrl+J | Search in definitions |
+| Ctrl+B, Ctrl+P | Profile query |
+| Ctrl+B, Ctrl+M | Estimated plan insights |
 | Ctrl+B, Ctrl+U / Ctrl+L | Keywords upper / lower case |
 | Ctrl+B, Ctrl+S | Script summary |
 | Ctrl+B, Ctrl+F | Find unused variables and parameters |
@@ -198,7 +235,8 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 2. Close SSMS.
 3. Double-click `DeftSQL.vsix` and follow the installer.
 4. Start SSMS. You'll find everything under **Extensions ▸ DeftSQL**, in the query editor's right-click menu,
-   and on the **DeftSQL toolbar** (Format, Snippets, Find Object, Code Analysis, Split Table, Script Results, Find in Results,
+   and on the **DeftSQL toolbar** (Format, Snippets, Find Object, Code Analysis, Split Table, Script Results, Profile Query, Search in Definitions,
+   Live Sessions, Find in Results,
    View Cell Value, Compare with Baseline, the Results Grid menu, Text to SQL,
    Explain, Optimize, AI Assistant, Query and Tab History, Refresh, Options, and a label showing which AI model
    answers). Show or hide the toolbar with **View ▸ Toolbars ▸ DeftSQL**.
