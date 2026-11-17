@@ -56,6 +56,12 @@ SHA-256: `B25A641B22055D0A2098890802C1D559A11426837E35BD9B2FBF08B6076F7EE6`
 
   Enter does the same when arguments are added. While a GitHub Copilot suggestion is shown, Tab accepts Copilot's suggestion instead.
   Options: *Tab completes function arguments* and *Alias completed functions in SELECT* (adds `AS FirstName`, off by default).
+- **Wrap a selected column in a function (new in 2.10.0):** select a column that is already in the query (double-click `FirstName`,
+  drag over it or use Shift+arrows) and a list of the built-in functions that fit its type opens, each showing the finished call.
+  Pick one with Enter, Tab or a double-click: `p.FirstName` becomes `ISNULL(p.FirstName, '')`, `LEFT(p.FirstName, 1)`, `UPPER(p.FirstName)` ...
+  The alias is included, and wrapping inside another call works (`UPPER(ISNULL(p.Title, ''))`). **Ctrl+Space** with a column selected
+  opens the list on demand and lets you type to filter it. Typing over the selection, Delete and Backspace still work as usual.
+  Option: *Suggest functions for a selected column* (on).
 
 
 ![Code completion with the object definition box](screenshots/completion.png)
@@ -71,6 +77,14 @@ SHA-256: `B25A641B22055D0A2098890802C1D559A11426837E35BD9B2FBF08B6076F7EE6`
 | ![Functions typed with only a column](screenshots/function-args-before.png) | ![Arguments filled in for each column's type](screenshots/function-args-after.png) |
 
 *Function argument completion: each line before and after pressing Tab.*
+
+![Function list for a selected column](screenshots/wrap-function-list.png)
+
+*Wrap in a function: FirstName selected, the functions that fit a text column with each finished call.*
+
+![Column wrapped in ISNULL](screenshots/wrap-function-after.png)
+
+*After picking ISNULL: `ISNULL(p.FirstName, '')`.*
 
 ### Snippets
 - 140 built-in snippets: type a shortcut and press **Tab**. They cover queries, joins, CTEs, DDL (columns, keys, indexes, triggers), dates, JSON and XML, error handling and DBA checks such as blocking, waits, index fragmentation, backups and jobs.
@@ -330,7 +344,10 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
   `ISNULL(p.FirstName, '')`, `ISNULL(e.Salary, 0)`, `LEFT(p.Name, 1)`, `CONVERT(varchar(10), o.OrderDate, 120)`,
   `DATEADD(day, 1, e.HireDate)` and about 80 more functions. Placeholders are selected for typing over; variables use their declared type.
 - Enter does the same when arguments are added; Tab is left to GitHub Copilot while its suggestion is shown.
-- New options: *Tab completes function arguments* (on) and *Alias completed functions in SELECT* (off).
+- **Wrap a selected column in a function:** select a column (double-click, drag or Shift+arrows) and a list of the built-in
+  functions that fit its type opens; pick one to get `ISNULL(p.FirstName, '')`, `LEFT(p.FirstName, 1)`, `UPPER(p.FirstName)` ...
+  Ctrl+Space with a column selected opens it on demand and lets you type to filter.
+- New options: *Tab completes function arguments* (on), *Alias completed functions in SELECT* (off) and *Suggest functions for a selected column* (on).
 - `DATALENGTH`, `ISDATE`, `LOG10`, `PATINDEX`, `SQUARE`, `STDEVP` and `VARP` added to completion and highlighting.
 - Product guide: new section with an examples table and before/after screenshots.
 
