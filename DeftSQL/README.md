@@ -3,9 +3,9 @@
 **DeftSQL** is a productivity extension for **SQL Server Management Studio 22**. It helps you write,
 format, check, refactor and navigate T-SQL faster, right inside the SSMS query editor.
 
-**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.9.0)
+**Download:** [DeftSQL.vsix](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL.vsix) (version 2.9.1)
 
-SHA-256: `547FE69444E3A9611A85D45E541B8DFF86D76906C59189A33A3118F4D9E1BA05`
+SHA-256: `B25A641B22055D0A2098890802C1D559A11426837E35BD9B2FBF08B6076F7EE6`
 
 **Product guide:** [DeftSQL-Product-Guide.docx](https://github.com/qasimshah0321/Setups/raw/main/DeftSQL/DeftSQL-Product-Guide.docx) (Word, every feature with its menu path and screenshots)
 
@@ -299,6 +299,11 @@ The same commands are under **Extensions ▸ DeftSQL ▸ Results Grid**, the edi
 ---
 
 ## Version history
+
+### 2.9.1 (17 November 2026): clearer toolbar icons
+- Every toolbar button now has its own icon: Profile Query is a speedometer, Suggest Fixes and Optimizations a light bulb,
+  Find Object an object search and Find in Results a filter, so they no longer look like each other or like Search in Definitions.
+- Product guide: new toolbar screenshot and a note on which icon is which.
 
 ### 2.9.0 (17 November 2026): performance tuning, navigation and code generation
 - **Performance:** Profile Query (reads per table, CPU and time, plan findings with advice), Estimated Plan Insights,
